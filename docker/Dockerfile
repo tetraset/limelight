@@ -13,6 +13,11 @@ RUN apt-get install -y nginx less curl cron wget git libzip-dev mecab mecab-ipad
 # Setup PHP
 RUN docker-php-ext-install pdo_mysql zip
 
+RUN wget https://github.com/tetraset/limelight/archive/master.zip \
+    && unzip master.zip \
+    && cp -R ./limelight-master/* . \
+    && rm -R limelight-master && rm master.zip
+
 RUN wget https://github.com/nihongodera/php-mecab/archive/master.zip \
     && unzip master.zip \
     && cd php-mecab-master/mecab \
