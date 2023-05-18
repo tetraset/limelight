@@ -27,7 +27,8 @@
     },
     "require": {
         "php": ">=5.6",
-        "ext-mecab": "*"
+        "ext-mecab": "*",
+        "mikecao/flight": "^2.0"
     },
     "scripts": {
         "test": "phpunit"

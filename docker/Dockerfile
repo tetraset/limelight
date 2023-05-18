@@ -8,7 +8,7 @@ WORKDIR /usr/limelight
 # Install apt dependencies
 RUN apt-get update
 
-RUN apt-get install -y less curl cron wget git libzip-dev mecab mecab-ipadic-utf8 mecab-utils libmecab-dev unzip build-essential
+RUN apt-get install -y nginx less curl cron wget git libzip-dev mecab mecab-ipadic-utf8 mecab-utils libmecab-dev unzip build-essential
 
 # Setup PHP
 RUN docker-php-ext-install pdo_mysql zip
@@ -20,7 +20,9 @@ RUN wget https://github.com/nihongodera/php-mecab/archive/master.zip \
     && ./configure \
     && make \
     && make install \
-    && docker-php-ext-enable mecab
+    && docker-php-ext-enable mecab && \
+    rm /etc/nginx/sites-enabled/*
 
-COPY ./docker/install_composer.sh /tmp/install_composer.sh
+COPY ./install_composer.sh /tmp/install_composer.sh
+COPY ./default.conf /etc/nginx/sites-enabled/default.conf
 RUN /tmp/install_composer.sh

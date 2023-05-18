@@ -4,3 +4,4 @@
 .env.example
 /vendor
 composer.lock
+.idea
